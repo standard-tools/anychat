@@ -1,7 +1,15 @@
 import { NextResponse } from 'next/server';
 
 export const config = {
-  matcher: '/((?!_next/static|_next/image|favicon.ico|assets).*)',
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - assets (static files)
+     * - favicon.ico (favicon file)
+     * - Files with extensions (css, js, etc)
+     */
+    '/((?!assets|favicon.ico|.*\\.).*)$'
+  ],
 };
 
 export default function middleware(request) {
