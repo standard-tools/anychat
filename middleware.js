@@ -1,3 +1,5 @@
+import { NextResponse } from 'next/server';
+
 export const config = {
   matcher: '/((?!_next/static|_next/image|favicon.ico|assets).*)',
 };
@@ -10,17 +12,23 @@ export default function middleware(request) {
   if (entryParam === 'const') {
     // Remove the query param and redirect to clean URL
     const cleanUrl = new URL(url.pathname, url.origin);
-    const response = Response.redirect(cleanUrl, 302);
+    const response = NextResponse.redirect(cleanUrl);
 
     // Set a cookie to remember authentication (6 months)
-    response.headers.set('Set-Cookie', 'auth_token=authenticated; HttpOnly; Secure; SameSite=Strict; Max-Age=15552000; Path=/');
+    response.cookies.set('auth_token', 'authenticated', {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'strict',
+      maxAge: 15552000,
+      path: '/'
+    });
     return response;
   }
 
   // Check if already authenticated via cookie
-  const cookies = request.headers.get('cookie') || '';
-  if (cookies.includes('auth_token=authenticated')) {
-    return Response.next();
+  const authToken = request.cookies.get('auth_token');
+  if (authToken?.value === 'authenticated') {
+    return NextResponse.next();
   }
 
   // Not authenticated - show auth gate
