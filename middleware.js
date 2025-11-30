@@ -12,8 +12,8 @@ export default function middleware(request) {
     const cleanUrl = new URL(url.pathname, url.origin);
     const response = Response.redirect(cleanUrl, 302);
 
-    // Set a cookie to remember authentication
-    response.headers.set('Set-Cookie', 'auth_token=authenticated; HttpOnly; Secure; SameSite=Strict; Max-Age=2592000; Path=/');
+    // Set a cookie to remember authentication (6 months)
+    response.headers.set('Set-Cookie', 'auth_token=authenticated; HttpOnly; Secure; SameSite=Strict; Max-Age=15552000; Path=/');
     return response;
   }
 
