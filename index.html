@@ -4,10 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>chat</title>
-    <script type="module" crossorigin src="/assets/index-CokjJeml.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-Bn00aAD-.css">
+    <script type="module" crossorigin src="/assets/index-pXx_1XlW.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-pOmXl4A7.css">
   </head>
-  <body>
+  <body class="fullscreen initial-load">
     <div id="root"></div>
+    <script>
+      // [Chesterton's Fence] Prevents navbar/toolbar flash on load (350ms = 300ms animation + 50ms buffer)
+      setTimeout(() => document.body.classList.remove('initial-load'), 350);
+    </script>
   </body>
 </html>
