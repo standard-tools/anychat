@@ -10,7 +10,38 @@
     <title>chat</title>
     <!-- [Chesterton's Fence] Placeholder to suppress 404 error (real favicon generated via canvas) -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>" />
-    <script type="module" crossorigin src="/assets/index-RmYOfCTl.js"></script>
+    <!-- [Chesterton's Fence] Entry-module boot failure: unregister the SW and reload once so
+         the network serves a consistent build. main.jsx clears the flag on boot; one try per incident. -->
+    <script>
+      (function () {
+        var HEAL_KEY = 'sw-heal';
+        window.addEventListener(
+          'error',
+          function (e) {
+            var t = e.target;
+            // Only the entry script: after boot, a module error is mid-session, not a
+            // boot failure, and must not unregister the SW under the user.
+            if (window.__appBooted) return;
+            if (!t || t.tagName !== 'SCRIPT' || t.type !== 'module') return;
+            if (!t.src || new URL(t.src).origin !== location.origin) return;
+            if (sessionStorage.getItem(HEAL_KEY)) return;
+            sessionStorage.setItem(HEAL_KEY, '1');
+            var reload = function () { location.reload(); };
+            if (navigator.serviceWorker) {
+              navigator.serviceWorker.getRegistrations()
+                .then(function (regs) {
+                  return Promise.all(regs.map(function (r) { return r.unregister(); }));
+                })
+                .then(reload, reload);
+            } else {
+              reload();
+            }
+          },
+          true,
+        );
+      })();
+    </script>
+    <script type="module" crossorigin src="/assets/index-BxSMC3-O.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/vendor-react-CuqPeN-N.js">
     <link rel="modulepreload" crossorigin href="/assets/pdfjs-CjmbB_ZT.js">
     <link rel="modulepreload" crossorigin href="/assets/vendor-db-BqSDGpxH.js">
