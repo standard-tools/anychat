@@ -1,10 +1,13 @@
-assets/artifactSessions-D93MQ-He.js
-assets/coderTasks-DyZMaVMj.js
+assets/artifactSessions-BlpyzWRs.js
+assets/coderTasks-C_Naf_II.js
 assets/docxExtractor-DO3L2sZX.js
-assets/epubExtractor-CcrClKK1.js
+assets/epubExtractor-0wkJFr3B.js
 assets/index-DZHWMIfP.js
 assets/jszip.min-BIhSWLkX.js
 assets/jszip.min-BSq3ShYa.js
+assets/manageTools-B8SSIdEj.js
+assets/monarch-DQuK-LYC.js
+assets/monarchContext-FEb8ZSd5.js
 assets/pdfExtractor-U6uF6GSr.js
 assets/pdfjs-CjmbB_ZT.js
 assets/vendor-db-BqSDGpxH.js
